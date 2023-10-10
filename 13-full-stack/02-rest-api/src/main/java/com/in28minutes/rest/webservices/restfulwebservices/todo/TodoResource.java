@@ -12,13 +12,13 @@ import org.springframework.web.bind.annotation.RequestBody;
 
 //@RestController
 public class TodoResource {
-	
+
 	private TodoService todoService;
-	
+
 	public TodoResource(TodoService todoService) {
 		this.todoService = todoService;
 	}
-	
+
 	@GetMapping("/users/{username}/todos")
 	public List<Todo> retrieveTodos(@PathVariable String username) {
 		return todoService.findByUsername(username);
@@ -47,10 +47,8 @@ public class TodoResource {
 	@PostMapping("/users/{username}/todos")
 	public Todo createTodo(@PathVariable String username,
 			 @RequestBody Todo todo) {
-		Todo createdTodo = todoService.addTodo(username, todo.getDescription(), 
-				todo.getTargetDate(),todo.isDone() );
-		
-		return createdTodo;
+		return todoService.addTodo(username, todo.getDescription(),
+				todo.getTargetDate(),todo.isDone());
 	}
 
 }

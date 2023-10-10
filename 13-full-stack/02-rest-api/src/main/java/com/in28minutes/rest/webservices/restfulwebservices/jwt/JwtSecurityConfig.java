@@ -48,6 +48,8 @@ public class JwtSecurityConfig {
         // https://docs.spring.io/spring-boot/docs/current/reference/html/data.html#data.sql.h2-web-console.spring-security
         return httpSecurity
                 .authorizeHttpRequests(auth -> auth
+                    .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
+                    .requestMatchers( "/api/**").permitAll()
                 	.requestMatchers("/authenticate").permitAll()
                 	.requestMatchers(PathRequest.toH2Console()).permitAll() // h2-console is a servlet and NOT recommended for a production
                     .requestMatchers(HttpMethod.OPTIONS,"/**")
@@ -91,7 +93,7 @@ public class JwtSecurityConfig {
     public JWKSource<SecurityContext> jwkSource() {
         JWKSet jwkSet = new JWKSet(rsaKey());
 
-        return (((jwkSelector, securityContext) 
+        return (((jwkSelector, securityContext)
                         -> jwkSelector.select(jwkSet)));
     }
 
@@ -106,11 +108,11 @@ public class JwtSecurityConfig {
                 .withPublicKey(rsaKey().toRSAPublicKey())
                 .build();
     }
-    
+
     @Bean
     public RSAKey rsaKey() {
         KeyPair keyPair = keyPair();
-        
+
         return new RSAKey
                 .Builder((RSAPublicKey) keyPair.getPublic())
                 .privateKey((RSAPrivateKey) keyPair.getPrivate())
@@ -129,7 +131,7 @@ public class JwtSecurityConfig {
                     "Unable to generate an RSA Key Pair", e);
         }
     }
-    
+
 }
 
 
