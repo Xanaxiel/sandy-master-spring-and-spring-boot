@@ -10,7 +10,6 @@ pipeline {
         CI = 'false'
         HOME = '.'
         npm_config_cache = 'npm-cache'
-        aws_credential = "AWS_CREDENTIAL_ID"
         bucket = "todo-app-js"
         region = "us-east-2"
     }
@@ -25,7 +24,7 @@ pipeline {
         }
         stage('Production') {
             steps {
-                withAWS(region:'${region}',credentials:'${aws_credential}') {
+                withAWS(region:'${region}',credentials:'${AWS_CREDENTIAL_ID}') {
                     s3Delete(bucket: '${bucket}', path:'**/*')
                     s3Upload(bucket: '${bucket}', workingDir:'build', includePathPattern:'**/*');
                 }
