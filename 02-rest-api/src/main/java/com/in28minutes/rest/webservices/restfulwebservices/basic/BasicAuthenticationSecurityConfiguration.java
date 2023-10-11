@@ -33,7 +33,7 @@ public class BasicAuthenticationSecurityConfiguration {
 									.anyRequest().authenticated()
 									.requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
 									.anyRequest().authenticated()
-									.requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
+									.requestMatchers("/**").permitAll()
 									.anyRequest().authenticated()
 
 						)
@@ -43,6 +43,7 @@ public class BasicAuthenticationSecurityConfiguration {
 						(SessionCreationPolicy.STATELESS))
 						// .csrf().disable() Deprecated in SB 3.1.x
 					.csrf(csrf -> csrf.disable()) // Starting from SB 3.1.x using Lambda DSL
+					.cors(cors -> cors.disable())
 			     // .csrf(AbstractHttpConfigurer::disable) // Starting from SB 3.1.x using Method Reference
 					.build();
 	}
