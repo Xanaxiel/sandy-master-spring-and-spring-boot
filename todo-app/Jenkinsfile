@@ -23,8 +23,10 @@ pipeline {
         stage('Production') {
             steps {
                 withAWS(region:'us-east-2',credentials:'AWS_CREDENTIAL_ID') {
-                    s3Delete(bucket: 'todo-app-js', path:'**/*')
-                    s3Upload(bucket: 'todo-app-js', workingDir:'build', includePathPattern:'**/*');
+                    s3Delete(bucket: 'todo-app-js', path:'**/*');
+                    dir('todo-app') {
+                        s3Upload(bucket: 'todo-app-js', workingDir:'build', includePathPattern:'**/*');
+                    }
                 }
             }
         }
