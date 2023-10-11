@@ -1,7 +1,9 @@
 pipeline {
     agent any
 
-    tools {NodeJS "node"}
+    tools {
+        NodeJS "NodeJS 16.18.0"
+    }
 
 
     environment {
