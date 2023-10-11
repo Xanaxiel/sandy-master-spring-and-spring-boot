@@ -10,7 +10,7 @@ pipeline {
         CI = 'false'
         HOME = '.'
         npm_config_cache = 'npm-cache'
-        bucket = "todo-app-js"
+        BUCKET = 'todo-app-js'
     }
     stages {
         stage('Build') {
@@ -24,8 +24,8 @@ pipeline {
         stage('Production') {
             steps {
                 withAWS(region:'us-east-2',credentials:'AWS_CREDENTIAL_ID') {
-                    s3Delete(bucket: '${bucket}', path:'**/*')
-                    s3Upload(bucket: '${bucket}', workingDir:'build', includePathPattern:'**/*');
+                    s3Delete(bucket: "${BUCKET}", path:'**/*')
+                    s3Upload(bucket: "${BUCKET}", workingDir:'build', includePathPattern:'**/*');
                 }
             }
         }
