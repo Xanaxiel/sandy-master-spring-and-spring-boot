@@ -24,7 +24,7 @@ pipeline {
         }
         stage('Production') {
             steps {
-                withAWS(region:'${region}',credentials:'${AWS_CREDENTIAL_ID}') {
+                withAWS(region:'${region}',credentials:'AWS_CREDENTIAL_ID') {
                     s3Delete(bucket: '${bucket}', path:'**/*')
                     s3Upload(bucket: '${bucket}', workingDir:'build', includePathPattern:'**/*');
                 }
