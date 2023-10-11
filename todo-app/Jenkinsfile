@@ -7,6 +7,7 @@ pipeline {
 
 
     environment {
+        CI = 'false'
         HOME = '.'
         npm_config_cache = 'npm-cache'
         aws_credential = "AWS_CREDENTIAL_ID"
