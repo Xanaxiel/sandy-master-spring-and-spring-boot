@@ -17,9 +17,10 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                cd 'todo-app'
-                sh 'npm install'
-                sh 'npm run build'
+                dir('todo-app') {
+                    sh 'npm install'
+                    sh 'npm run build'
+                }
             }
         }
         stage('Production') {
