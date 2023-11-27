@@ -1,4 +1,4 @@
-package com.in28minutes.rest.webservices.restfulwebservices.todo.repository;
+package com.in28minutes.rest.webservices.restfulwebservices.repository;
 
 import java.util.List;
 

@@ -11,20 +11,20 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.in28minutes.rest.webservices.restfulwebservices.todo.repository.TodoRepository;
+import com.in28minutes.rest.webservices.restfulwebservices.repository.TodoRepository;
 
 @RestController
 public class TodoJpaResource {
-	
+
 	private TodoService todoService;
-	
+
 	private TodoRepository todoRepository;
-	
+
 	public TodoJpaResource(TodoService todoService, TodoRepository todoRepository) {
 		this.todoService = todoService;
 		this.todoRepository = todoRepository;
 	}
-	
+
 	@GetMapping("/users/{username}/todos")
 	public List<Todo> retrieveTodos(@PathVariable String username) {
 		//return todoService.findByUsername(username);
@@ -59,11 +59,22 @@ public class TodoJpaResource {
 			 @RequestBody Todo todo) {
 		todo.setUsername(username);
 		todo.setId(null);
+
+
 		return todoRepository.save(todo);
-//		Todo createdTodo = todoService.addTodo(username, todo.getDescription(), 
+//		Todo createdTodo = todoService.addTodo(username, todo.getDescription(),
 //				todo.getTargetDate(),todo.isDone() );
-		
+
 //		return createdTodo;
+	}
+
+	public static void main(String[] args) {
+		String str = "And now here is my secret";
+		String newMsg = str.substring(0, 15);
+		System.out.println(newMsg);
+		for (char c : str.toCharArray()) {
+
+		}
 	}
 
 }
